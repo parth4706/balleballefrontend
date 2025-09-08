@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="homepage.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <title>Craft Connect — Creative | Technologist | Developer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Creative | Technologist | Developer — immersive, interactive portfolio." />
+ <script src="https://cdn.jsdelivr.net/npm/fluid-canvas@latest"></script>
+</head>
+<body>
+  
+  <div class="brand" aria-label="Brand">CRAFT&nbsp;CONNECT</div>
+  <div class="hint" aria-hidden="true">Move your mouse or tilt your phone</div>
+
+  <main class="stage" aria-label="Interactive hero">
+    <canvas class="webgl" aria-hidden="true"></canvas>
+    <canvas class="fallback" aria-hidden="true" style="display:none"></canvas>
+
+    <div class="title-wrap" aria-live="polite">
+      <div class="title">
+        <h1 class="name">CRAFT&nbsp;CONNECT</h1>
+        <div class="roles">CREATIVE &nbsp;||&nbsp; TECHNOLOGIST &nbsp;||&nbsp; DEVELOPER</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom navigation (marked for future routing) -->
+  <nav class="nav" aria-label="Primary">
+    <!-- TODO: connect data-route to real pages later -->
+    <a class="btn" href="#" data-route="work" aria-label="Work">WORK</a>
+    <a class="btn" href="#" data-route="prototypes" aria-label="Prototypes">PROTOTYPES</a>
+    <a class="btn" href="#" data-route="art" aria-label="Art">ART</a>
+    <a class="btn" href="#" data-route="press" aria-label="Press">PRESS</a>
+    <a class="btn" href="#" data-route="info" aria-label="Info">INFO</a>
+    <a class="btn" href="#" data-route="reel" aria-label="Reel">REEL</a>
+  </nav>
+
+  <!-- Three.js (for robust GL context and geometry) -->
+  <canvas id="renderSurface"></canvas>
+</body>
+</html>

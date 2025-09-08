@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CraftConnect — Empowering Local Artisans</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+:root {
+  --bg: #0a0a0a;
+  --fg: #ffffff;
+  --accent: #ffb347;
+  --muted: rgba(255,255,255,0.6);
+  --font: 'Helvetica Neue', Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: hidden;
+}
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 40px;
+  z-index: 10;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+header .logo {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+nav a {
+  color: var(--muted);
+  margin-left: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+nav a:hover { color: var(--fg); }
+.hero {
+  height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero canvas {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 20px;
+}
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 5rem);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+.cta {
+  display: inline-block;
+  padding: 14px 28px;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: bold;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+.cta:hover { background: #ff9f1c; }
+section {
+  padding: 100px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+section p {
+  color: var(--muted);
+  max-width: 700px;
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">CraftConnect</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#makers">Makers</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <canvas id="bg"></canvas>
+  <div class="hero-content">
+    <h1>Where Tradition Meets Technology</h1>
+    <p>AI-powered marketplace helping local artisans share their craft with the world.</p>
+    <a href="#about" class="cta">Discover More</a>
+  </div>
+</section>
+
+<section id="about" class="fade-in">
+  <h2>About CraftConnect</h2>
+  <p>We empower artisans by combining storytelling, design, and AI-driven tools to expand their reach and preserve cultural heritage.</p>
+</section>
+
+<section id="makers" class="fade-in">
+  <h2>Meet the Makers</h2>
+  <p>From handwoven textiles to intricate ceramics, our platform showcases the people and processes behind every creation.</p>
+</section>
+
+<section id="contact" class="fade-in">
+  <h2>Contact Us</h2>
+  <p>Email: hello@craftconnect.com</p>
+</section>
+
+<script>
+// Simple animated background
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+let w, h, t = 0;
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+function draw() {
+  t += 0.005;
+  for (let y = 0; y < h; y++) {
+    const hue = 200 + 40 * Math.sin(t + y / 200);
+    ctx.fillStyle = `hsl(${hue}, 60%, 10%)`;
+    ctx.fillRect(0, y, w, 1);
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+// Fade-in on scroll
+const faders = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+faders.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
