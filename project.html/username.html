@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create Username</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      max-width: 400px;
+    }
+    label, input, button, a#goLoginBtn {
+      display: block;
+      width: 100%;
+      margin-bottom: 12px;
+      font-size: 1em;
+    }
+    button {
+      padding: 10px;
+      background-color: #4a90e2;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #357abd;
+    }
+    #usernameOutput {
+      font-weight: bold;
+      margin-top: 15px;
+      color: green;
+    }
+    a#goLoginBtn {
+      text-align: center;
+      text-decoration: none;
+      background: #4a90e2;
+      color: white;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      display: none;
+    }
+    a#goLoginBtn:hover {
+      background: #357abd;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Create a Username</h2>
+
+<label for="fullname">Enter your full name:</label>
+<input type="text" id="fullname" placeholder="e.g. Doom Slayer" />
+
+<button id="createBtn">Create Username</button>
+
+<div id="usernameOutput"></div>
+
+<a href="login.html" id="goLoginBtn">Go to Login</a>
+
+<script>
+  function generateUsername(name) {
+    if (!name) return '';
+
+    let username = name.toLowerCase().trim().replace(/\s+/g, '');
+    username = username.replace(/[^a-z0-9_]/g, '');
+
+    if (username.length > 15) {
+      username = username.substring(0, 15);
+    }
+
+    return username || 'user';
+  }
+
+  const btn = document.getElementById('createBtn');
+  const input = document.getElementById('fullname');
+  const output = document.getElementById('usernameOutput');
+  const goLoginBtn = document.getElementById('goLoginBtn');
+
+  btn.addEventListener('click', () => {
+    const name = input.value;
+    const username = generateUsername(name);
+
+    if (!username) {
+      output.textContent = 'Please enter a valid name.';
+      output.style.color = 'red';
+      goLoginBtn.style.display = 'none';
+    } else {
+      output.textContent = `Suggested username: ${username}`;
+      output.style.color = 'green';
+      goLoginBtn.style.display = 'inline-block';
+    }
+  });
+  
+</script>
+
+</body>
+</html>
