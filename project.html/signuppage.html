@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up with Email</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e3e3e3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .signup-container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+     button:hover {
+        filter: brightness(1.2);
+    }
+    .message {
+      text-align: center;
+      margin-top: 10px;
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      color: #007bff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-container">
+    <h2>Sign Up</h2>
+    <div id="message" class="message"></div>
+    <input type="email" id="email" placeholder="Enter your email" />
+    <input type="password" id="password" placeholder="Choose a password" />
+    <button onclick="signUp()">Create Account</button>
+    <a href="login.html">Already a user?Login</a>
+  </div>
+
+  <script>
+    function signUp() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const messageDiv = document.getElementById('message');
+
+      if (!email || !password) {
+        messageDiv.style.color = 'red';
+        messageDiv.textContent = 'Please fill out all fields.';
+        return;
+      }
+
+      // Basic email validation: must contain '@'
+      if (!email.includes('@')) {
+        messageDiv.style.color = 'red';
+        messageDiv.textContent = 'Please enter a valid email address.';
+        return;
+      }
+
+      // Store in localStorage (demo only!)
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+
+      messageDiv.style.color = 'green';
+      messageDiv.textContent = 'Account created! Redirecting to create username...';
+
+      setTimeout(() => {
+        window.location.href = 'username.html';
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
+
